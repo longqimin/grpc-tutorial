@@ -6,6 +6,7 @@ import (
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/peer"
 
 	pb "../../interfaces"
 )
@@ -20,6 +21,9 @@ type server struct{}
 // SayHello implements interfaces.GreeterServer
 func (s *server) SayHello(ctx context.Context, in *pb.HelloRequest) (*pb.HelloReply, error) {
 	println("SayHello")
+	if peer, ok := peer.FromContext(ctx); ok {
+		println(peer.Addr.String())
+	}
 	return &pb.HelloReply{Message: "hello"}, nil
 }
 

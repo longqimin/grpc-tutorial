@@ -9,6 +9,7 @@ class Greeter(interfaces_pb2.BetaGreeterServicer):
 
   def SayHello(self, request, context):
     print "SayHello"
+    print context.protocol_context().peer()
     return interfaces_pb2.HelloReply(message = "hello")
 
 

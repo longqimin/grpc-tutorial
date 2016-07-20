@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"os"
-	"time"
 
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -30,7 +29,7 @@ func main() {
 	if len(os.Args) > 1 {
 		name = os.Args[1]
 	}
-	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name}, grpc.WithTimeout(time.Second*12))
+	r, err := c.SayHello(context.Background(), &pb.HelloRequest{Name: name}, grpc.FailFast(true))
 	if err != nil {
 		log.Fatalf("could not greet: %v", err)
 	}
